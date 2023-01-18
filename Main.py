@@ -2,23 +2,22 @@ from wjazz_training_classes import *
 import os
 import pickle
 
-def run():
+def run(dir):
 
     opts = {"n_beats": 4, "division": 4, "n_measures": 24, "max_sects" : 16, 
         "oct_shift": 1, "pitch_from": 36, "pitch_thru": 96, "noise_level": 0}
 
-    # dir = "./"
 
-    db = DBReader("wjazzd.db")
+    db = DBReader(dir + "wjazzd.db")
     mel_chd = FramewiseMelodyChordSet(db, ["BLUES"], opts)
     nn_chd = NoteNumChordVec(mel_chd)
-    with open("wjazzd_data_div4.bin", "wb") as p:
+    with open(dir + "wjazzd_data_div4.bin", "wb") as p:
         pickle.dump({"db": db, "mel_chd": mel_chd, "nn_chd": nn_chd}, p)
 
 
     #smooth_levelは奇数
     opts.update({"interp_level": 0, "smooth_level": opts["division"]*2+1})
-    with open("wjazzd_data_div4.bin", "rb") as p:
+    with open(dir + "wjazzd_data_div4.bin", "rb") as p:
         data = pickle.load(p)
         db = data["db"]
         mel_chd = data["mel_chd"]
@@ -54,10 +53,12 @@ def run():
             melody, chords = midimaker.make_midi(y_pred[i], mat.x_test[i], result_dir + ("/mid/test%04d_pred.mid" % i))
 
     opts.update({"hidden_dim": 512, "winsize": 4})
-    start_experiment(mat, opts, "/20221206/data/")
+    start_experiment(mat, opts, dir + "/20221206/data/")
 
 
 if __name__ == "__main__":
-    run()
+    dir_colab = "/content/deeplearning-trial-code/"
+    dir_local = "./"
+    run(dir_colab)
 
 
