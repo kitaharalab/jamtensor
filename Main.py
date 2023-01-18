@@ -2,12 +2,12 @@ from wjazz_training_classes import *
 import os
 import pickle
 
-def run():
+def run(dir):
 
     opts = {"n_beats": 4, "division": 4, "n_measures": 24, "max_sects" : 16, 
         "oct_shift": 1, "pitch_from": 36, "pitch_thru": 96, "noise_level": 0}
 
-    dir = "./"
+    # dir = "./"
     db = DBReader(dir + "wjazzd.db")
     mel_chd = FramewiseMelodyChordSet(db, ["BLUES"], opts)
     nn_chd = NoteNumChordVec(mel_chd)
@@ -58,6 +58,7 @@ def run():
 
 if __name__ == "__main__":
 
-    run()
+   dir = input("type the wjazaa.db path in colab: ") if input("want to execute in colab ? (yes/no): ") == "yes" else "./"
+   run(dir)
 
 
