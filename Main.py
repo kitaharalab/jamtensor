@@ -59,6 +59,7 @@ def run(dir):
 if __name__ == "__main__":
 
    dir = input("type the wjazaa.db path in colab: ") if input("want to execute in colab ? (yes/no): ") == "yes" else "./"
+   print(dir)
    run(dir)
 
 
