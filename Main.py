@@ -2,12 +2,12 @@ from wjazz_training_classes import *
 import os
 import pickle
 
-def run(dir):
+def run():
 
     opts = {"n_beats": 4, "division": 4, "n_measures": 24, "max_sects" : 16, 
         "oct_shift": 1, "pitch_from": 36, "pitch_thru": 96, "noise_level": 0}
 
-
+    dir = "./"
     db = DBReader(dir + "wjazzd.db")
     mel_chd = FramewiseMelodyChordSet(db, ["BLUES"], opts)
     nn_chd = NoteNumChordVec(mel_chd)
@@ -57,8 +57,7 @@ def run(dir):
 
 
 if __name__ == "__main__":
-    dir_colab = "/content/deeplearning-trial-code/"
-    dir_local = "./"
-    run(dir_colab)
+
+    run()
 
 
