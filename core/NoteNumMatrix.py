@@ -13,7 +13,6 @@ class NoteNumMatrix:
   
   def notenums_to_onehot(self, noteseq):
     MAX_NUM = NoteNumChordVec.MAX_NUM
-    self.melody_dim = self.pitch_range * 2 + 1
     seq = []
     for nn in noteseq:
       vec = np.zeros(self.melody_dim)    #「継続」要素を追加
