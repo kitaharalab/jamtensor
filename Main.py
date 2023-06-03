@@ -1,4 +1,4 @@
-from wjazz_training_classes import *
+from core import *
 import os
 import pickle
 
