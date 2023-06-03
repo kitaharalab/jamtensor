@@ -8,14 +8,14 @@ def run(dir):
         "oct_shift": 1, "pitch_from": 36, "pitch_thru": 96, "noise_level": 0}
 
     # dir = "./"
-    db = DBReader(dir + "wjazzd.db")
+    db = DBReader(dir + "/" + "wjazzd.db")
     mel_chd = FramewiseMelodyChordSet(db, ["BLUES"], opts)
     nn_chd = NoteNumChordVec(mel_chd)
     with open(dir + "wjazzd_data_div4.bin", "wb") as p:
         pickle.dump({"db": db, "mel_chd": mel_chd, "nn_chd": nn_chd}, p)
 
 
-    #smooth_levelは奇数
+    #smooth_level縺ｯ螂����焚
     opts.update({"interp_level": 0, "smooth_level": opts["division"]*2+1})
     with open(dir + "wjazzd_data_div4.bin", "rb") as p:
         data = pickle.load(p)
@@ -58,8 +58,7 @@ def run(dir):
 
 if __name__ == "__main__":
 
-   dir = "/content/deeplearning-trial-code/"
-#    print(dir)
-   run(dir)
+    #dir = "/content/deeplearning-trial-code/"
+    run(".")
 
 
