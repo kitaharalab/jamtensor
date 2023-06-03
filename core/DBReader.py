@@ -3,7 +3,6 @@ import pandas as pd
 
 class DBReader:
   def __init__(self, dbfile):
-    print(dbfile)
     conn = sqlite3.connect(dbfile)
     self.melid_list = self.get_list("melid", "solo_info", conn)
     self.keys = self.get_dict("melid", "key", "solo_info", conn)

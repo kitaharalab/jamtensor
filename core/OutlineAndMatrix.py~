@@ -5,7 +5,8 @@ from .NoteNumChordVec import NoteNumChordVec
 
 class OutlineAndMatrix(NoteNumMatrix):
   def __init__(self, opts):
-    super().__init__(opts)
+    self.pitch_from = opts["pitch_from"]
+    self.pitch_thru = opts["pitch_thru"]
     self.interp_level = opts["interp_level"]
     self.smooth_level = opts["smooth_level"]
 

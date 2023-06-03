@@ -5,14 +5,9 @@ from .NoteNumChordVec import NoteNumChordVec
 
 class NoteNumMatrix:
 
-  def __init__(self, opts):
-    self.pitch_from = opts["pitch_from"]
-    self.pitch_thru = opts["pitch_thru"]
-    self.pitch_range = self.pitch_thru - self.pitch_from 
-    self.melody_dim = self.pitch_range * 2 + 1
-  
   def notenums_to_onehot(self, noteseq):
     MAX_NUM = NoteNumChordVec.MAX_NUM
+    self.pitch_range = self.pitch_thru - self.pitch_from 
     self.melody_dim = self.pitch_range * 2 + 1
     seq = []
     for nn in noteseq:
@@ -39,7 +34,7 @@ class NoteNumMatrix:
   def get_chord_elements(self, x):
     return x[:, self.melody_dim:]
 
-'''
+
 class NoisyNoteNumMatrix(NoteNumMatrix):
   def __init__(self, opts):
     self.pitch_from = opts["pitch_from"]
@@ -58,4 +53,3 @@ class NoisyNoteNumMatrix(NoteNumMatrix):
     noise_value = scipy.stats.norm.rvs(0, noiselevel, size=len(notenums))
     return [notenums[i] + int(noise_value[i]) if notenums[i] != None 
             else None for i in range(len(notenums))]
-'''
